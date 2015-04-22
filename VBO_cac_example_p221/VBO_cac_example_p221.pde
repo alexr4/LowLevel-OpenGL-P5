@@ -18,7 +18,7 @@ void setup() {
   size(1280, 720, P3D);
 
   //obj
-  nbObj = 4;
+  nbObj = 2;
   resX = width/nbObj;
   resY = height/nbObj;
 
