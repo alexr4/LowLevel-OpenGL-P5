@@ -5,7 +5,7 @@ import java.nio.*;
 PGraphics offscreen;
 
 //VBO
-int maxVert = 500000;
+int maxVert = 100000; //CPU seems to have probleme with million elements
 int nvert = maxVert;
 int SIZEOF_INT = Integer.SIZE / 8;
 int SIZEOF_FLOAT = Float.SIZE / 8;
@@ -32,7 +32,7 @@ void setup() {
   offscreen.smooth();
 
   //obj
-  nbObj = 6;
+  nbObj = 2;
   resX = width/nbObj;
   resY = height/nbObj;
 
@@ -98,6 +98,8 @@ void draw() {
 
       gl2.glVertexPointer(3, PGL.FLOAT, 7 * SIZEOF_FLOAT, 0);
       gl2.glColorPointer(4, PGL.FLOAT, 7 * SIZEOF_FLOAT, 3 * SIZEOF_FLOAT);
+      
+      //gl2.glPointSize(map(mouseX, 0, width, 1, 100));
 
       pgl.drawArrays(PGL.POINTS, 0, nvert);
 
@@ -189,7 +191,6 @@ void updateGeometry(float res)
 void updateVBO() {
   // vboName = allocateDirectIntBuffer(1);
   pgl = beginPGL();
-  //pgl.genBuffers(1, vboName);
   pgl.bindBuffer(PGL.ARRAY_BUFFER, vboName.get(0));
   pgl.bufferData(PGL.ARRAY_BUFFER, nvert * 7 * SIZEOF_FLOAT, vertData, PGL.DYNAMIC_DRAW);
   pgl.bindBuffer(PGL.ARRAY_BUFFER, 0);
